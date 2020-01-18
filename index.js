@@ -22,6 +22,6 @@ mongoClient.connect(url, { useUnifiedTopology: true }, (error, client) => {
   app.locals.db = client.db("crwn-db");
 });
 
-app.listen(8080, () => {
+app.listen(process.env.PORT || 8080, () => {
   console.log("server started at port 8080");
 });
