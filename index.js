@@ -13,9 +13,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use("/user", userRouter);
 
-const url = process.env.DATABASE_URL;
+const uri = process.env.DATABASE_URL;
 
-mongoClient.connect(url, { useUnifiedTopology: true }, (error, client) => {
+mongoClient.connect(uri, { useUnifiedTopology: true }, (error, client) => {
   if (error) {
     throw error;
   }
