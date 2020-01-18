@@ -13,9 +13,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use("/user", userRouter);
 
-const uri = process.env.DATABASE_URL;
+const url =
+  "mongodb+srv://rizwan:rizwan123@rizwan-cluster-g7cq1.azure.mongodb.net/?retryWrites=true&w=majority";
 
-mongoClient.connect(uri, { useUnifiedTopology: true }, (error, client) => {
+mongoClient.connect(url, { useUnifiedTopology: true }, (error, client) => {
   if (error) {
     throw error;
   }
