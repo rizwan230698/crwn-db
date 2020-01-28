@@ -5,6 +5,7 @@ const mongoClient = require("mongodb").MongoClient;
 const cors = require("cors");
 
 const userRouter = require("./routes/user-router");
+const paymentRouter = require("./routes/payment-router");
 
 const app = express();
 
@@ -12,6 +13,7 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use("/user", userRouter);
+app.use("/payment", paymentRouter);
 
 const url = process.env.DATABASE_URL;
 mongoClient.connect(url, { useUnifiedTopology: true }, (error, client) => {
@@ -22,7 +24,10 @@ mongoClient.connect(url, { useUnifiedTopology: true }, (error, client) => {
 });
 
 app.get("/", (req, res) => {
-  res.json({ message: "welcome to crwn-db" });
+  res.json({ message: "Hello from crwn-db" });
 });
 const PORT = process.env.PORT || 8080;
-app.listen(PORT, () => console.log(`server started at port ${PORT}`));
+app.listen(PORT, error => {
+  if (error) throw error;
+  console.log(`server started at port ${PORT}`);
+});
