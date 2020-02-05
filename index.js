@@ -3,6 +3,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoClient = require("mongodb").MongoClient;
 const cors = require("cors");
+const enforce = require("express-sslify");
 
 const userRouter = require("./routes/user-router");
 const paymentRouter = require("./routes/payment-router");
@@ -10,6 +11,7 @@ const paymentRouter = require("./routes/payment-router");
 const app = express();
 
 app.use(cors());
+app.use(enforce.HTTPS({ trustProtoHeader: true }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use("/user", userRouter);
